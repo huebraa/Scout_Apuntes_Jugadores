@@ -5,24 +5,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 const defaultFormation = {
-  GK: "",
-  LB: "",
-  CB1: "",
-  CB2: "",
-  RB: "",
-  CDM1: "",
-  CDM2: "",
-  CAM: "",
-  LW: "",
-  RW: "",
-  ST: "",
+  GK: "", LB: "", CB1: "", CB2: "", RB: "",
+  CDM1: "", CDM2: "", CAM: "", LW: "", RW: "", ST: ""
 };
 
 export default function MatchNotes() {
   const [matchInfo, setMatchInfo] = useState({ date: "", location: "", teamA: "", teamB: "" });
-  const [players, setPlayers] = useState([
-    { name: "", position: "", actions: "", rating: "", comments: "" },
-  ]);
+  const [players, setPlayers] = useState([{ name: "", position: "", actions: "", rating: "", comments: "" }]);
   const [analysis, setAnalysis] = useState({ bestPlayer: "", revelation: "", tactics: "" });
   const [formationA, setFormationA] = useState({ ...defaultFormation });
   const [formationB, setFormationB] = useState({ ...defaultFormation });
@@ -43,11 +32,11 @@ export default function MatchNotes() {
   };
 
   const renderFormation = (formation, team) => (
-    <div className="bg-green-700 text-white rounded-xl p-4 grid gap-2">
-      <h3 className="text-lg font-semibold">Formación {team === "A" ? matchInfo.teamA : matchInfo.teamB} (4-2-3-1)</h3>
-      <div className="grid grid-cols-1 text-center">
-        <Input placeholder="ST" value={formation.ST} onChange={e => handleFormationChange(team, "ST", e.target.value)} />
-      </div>
+    <div className="bg-green-700 text-white rounded-xl p-4 space-y-2">
+      <h3 className="text-lg font-semibold">
+        Formación {team === "A" ? matchInfo.teamA || "Equipo A" : matchInfo.teamB || "Equipo B"} (4-2-3-1)
+      </h3>
+      <div className="grid grid-cols-1"><Input placeholder="ST" value={formation.ST} onChange={e => handleFormationChange(team, "ST", e.target.value)} /></div>
       <div className="grid grid-cols-3 gap-2">
         <Input placeholder="LW" value={formation.LW} onChange={e => handleFormationChange(team, "LW", e.target.value)} />
         <Input placeholder="CAM" value={formation.CAM} onChange={e => handleFormationChange(team, "CAM", e.target.value)} />
@@ -63,9 +52,7 @@ export default function MatchNotes() {
         <Input placeholder="CB2" value={formation.CB2} onChange={e => handleFormationChange(team, "CB2", e.target.value)} />
         <Input placeholder="RB" value={formation.RB} onChange={e => handleFormationChange(team, "RB", e.target.value)} />
       </div>
-      <div className="grid grid-cols-1">
-        <Input placeholder="GK" value={formation.GK} onChange={e => handleFormationChange(team, "GK", e.target.value)} />
-      </div>
+      <div><Input placeholder="GK" value={formation.GK} onChange={e => handleFormationChange(team, "GK", e.target.value)} /></div>
     </div>
   );
 
